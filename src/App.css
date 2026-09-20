@@ -1,0 +1,8 @@
+/* App specific utilities if needed */
+.glow-accent {
+  box-shadow: 0 0 50px -10px rgba(255, 55, 95, 0.35);
+}
+
+.glow-card {
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.8), 0 0 20px -5px rgba(255, 55, 95, 0.15);
+}
