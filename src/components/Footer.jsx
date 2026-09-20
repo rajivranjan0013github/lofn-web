@@ -18,16 +18,18 @@ export default function Footer() {
           Natural conversations with AI companions. Built for iOS and Android.
         </p>
 
-        <div className="flex items-center justify-center gap-6 text-xs text-zinc-400 pt-2">
+        <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-zinc-400 pt-2">
           <Link to="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
           <span>&bull;</span>
           <Link to="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
+          <span>&bull;</span>
+          <Link to="/delete-account" className="hover:text-white transition-colors">Delete Account</Link>
           <span>&bull;</span>
           <span className="text-zinc-600">18+ Only</span>
         </div>
 
         <div className="text-[11px] text-zinc-500 pt-2 space-y-1">
-          <p>&copy; {new Date().getFullYear()} Lofn. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Thousand Ways Private Limited. All rights reserved.</p>
           <p>
             Managed by{' '}
             <a

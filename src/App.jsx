@@ -5,6 +5,7 @@ import Home from './pages/Home'
 import About from './pages/About'
 import PrivacyPolicy from './pages/PrivacyPolicy'
 import TermsOfService from './pages/TermsOfService'
+import DeleteAccount from './pages/DeleteAccount'
 import NotFound from './pages/NotFound'
 import './App.css'
 
@@ -23,6 +24,7 @@ function App() {
             <Route path="/privacy" element={<PrivacyPolicy />} />
             <Route path="/policy" element={<PrivacyPolicy />} />
             <Route path="/terms" element={<TermsOfService />} />
+            <Route path="/delete-account" element={<DeleteAccount />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
