@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import { Apple, Play, Shield, Sparkles, MessageCircle, Flame } from 'lucide-react'
 import { featuredCharacters } from '../data/characters'
+import { publicMediaUrl } from '../services/api'
 import PhoneMockup from './PhoneMockup'
 
-export default function Hero() {
+export default function Hero({ onSelectCompanion }) {
   const [activeCharId, setActiveCharId] = useState(featuredCharacters[0].id)
   const [viewMode, setViewMode] = useState('match') // 'match' | 'chat'
   const activeChar = featuredCharacters.find((c) => c.id === activeCharId) || featuredCharacters[0]
@@ -59,6 +60,21 @@ export default function Hero() {
           <Shield className="w-3.5 h-3.5 text-[#30D158]" />
           <span>Strictly 18+ • Private & Encrypted • iOS & Android</span>
         </div>
+
+        {/* Live Chat Action CTA */}
+        <div className="pt-2 flex justify-center">
+          <button
+            type="button"
+            onClick={() => {
+              onSelectCompanion?.(activeChar)
+              document.getElementById('chat')?.scrollIntoView({ behavior: 'smooth' })
+            }}
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-gradient-to-r from-[#FF375F] to-[#FF5E7E] text-white font-semibold text-xs sm:text-sm shadow-lg shadow-[#FF375F]/25 hover:shadow-xl hover:shadow-[#FF375F]/40 hover:-translate-y-0.5 transition-all cursor-pointer"
+          >
+            <MessageCircle className="w-4 h-4" />
+            <span>Chat with {activeChar.name} (No Sign-In Required)</span>
+          </button>
+        </div>
       </div>
 
       {/* Companion Switcher & View Mode Toggle */}
@@ -70,15 +86,18 @@ export default function Hero() {
             return (
               <button
                 key={char.id}
-                onClick={() => setActiveCharId(char.id)}
-                className={`flex items-center gap-2 px-3.5 py-1.5 rounded-full transition-all text-xs font-semibold ${
+                onClick={() => {
+                  setActiveCharId(char.id)
+                  onSelectCompanion?.(char)
+                }}
+                className={`flex items-center gap-2 px-3.5 py-1.5 rounded-full transition-all text-xs font-semibold cursor-pointer ${
                   isActive
                     ? 'bg-[#FF375F] text-white shadow-md shadow-[#FF375F]/30 scale-105'
                     : 'text-zinc-400 hover:text-white hover:bg-white/5'
                 }`}
               >
                 <img
-                  src={char.avatar}
+                  src={publicMediaUrl(char.avatar)}
                   alt={char.name}
                   className="w-5 h-5 rounded-full object-cover ring-1 ring-white/20"
                 />

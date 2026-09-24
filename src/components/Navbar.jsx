@@ -13,14 +13,22 @@ export default function Navbar() {
           />
         </a>
 
-        {/* Action CTA */}
-        <a
-          href="#download"
-          className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#FF375F] hover:bg-[#E02850] text-white text-xs sm:text-sm font-semibold transition-all shadow-md shadow-[#FF375F]/25 hover:shadow-lg hover:shadow-[#FF375F]/40 hover:-translate-y-0.5"
-        >
-          <Smartphone className="w-3.5 h-3.5" />
-          Get App
-        </a>
+        {/* Action CTA & Navigation */}
+        <div className="flex items-center gap-4">
+          <a
+            href="#chat"
+            className="text-xs sm:text-sm font-medium text-zinc-300 hover:text-[#FF375F] transition-colors"
+          >
+            Live Chat
+          </a>
+          <a
+            href="#download"
+            className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 rounded-full bg-[#FF375F] hover:bg-[#E02850] text-white text-xs sm:text-sm font-semibold transition-all shadow-md shadow-[#FF375F]/25 hover:shadow-lg hover:shadow-[#FF375F]/40 hover:-translate-y-0.5"
+          >
+            <Smartphone className="w-3.5 h-3.5" />
+            <span>Get App</span>
+          </a>
+        </div>
       </div>
     </header>
   )

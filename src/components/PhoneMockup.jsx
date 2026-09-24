@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   X,
   Star,
@@ -13,6 +13,7 @@ import {
   Image as ImageIcon,
   ChevronLeft,
 } from 'lucide-react'
+import { publicMediaUrl, fetchGemsBalance } from '../services/api'
 
 // Authentic iOS Status Bar Icons
 function SignalIcon({ className = 'w-3.5 h-3.5' }) {
@@ -48,6 +49,13 @@ function BatteryIcon() {
 export default function PhoneMockup({ activeChar, viewMode = 'match', onToggleView }) {
   const [photoIndex, setPhotoIndex] = useState(0)
   const [likedAnim, setLikedAnim] = useState(false)
+  const [gems, setGems] = useState(100)
+
+  useEffect(() => {
+    fetchGemsBalance().then((val) => {
+      if (typeof val === 'number') setGems(val)
+    })
+  }, [])
 
   const isChat = viewMode === 'chat'
 
@@ -56,7 +64,7 @@ export default function PhoneMockup({ activeChar, viewMode = 'match', onToggleVi
     setTimeout(() => setLikedAnim(false), 900)
   }
 
-  const currentPhotos = activeChar.photos?.length ? activeChar.photos : [activeChar.avatar]
+  const currentPhotos = (activeChar.photos?.length ? activeChar.photos : [activeChar.avatar]).map(publicMediaUrl)
 
   return (
     <div className="relative mx-auto select-none">
@@ -123,7 +131,7 @@ export default function PhoneMockup({ activeChar, viewMode = 'match', onToggleVi
                 {/* Hearts / Gems Token Badge */}
                 <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/10 text-white shadow-xs">
                   <Heart className="w-3.5 h-3.5 text-[#FF375F] fill-[#FF375F]" />
-                  <span className="text-xs font-bold font-mono">18</span>
+                  <span className="text-xs font-bold font-mono">{gems}</span>
                 </div>
               </div>
 
@@ -288,7 +296,7 @@ export default function PhoneMockup({ activeChar, viewMode = 'match', onToggleVi
 
                   <div className="relative">
                     <img
-                      src={activeChar.avatar}
+                      src={publicMediaUrl(activeChar.avatar)}
                       alt={activeChar.name}
                       className="w-8 h-8 rounded-full object-cover ring-2 ring-white/15"
                     />
